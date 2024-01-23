@@ -1,23 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+// import { getDatabase ,ref ,set } from "firebase/database";
+import {getAuth ,createUserWithEmailAndPassword} from "firebase/auth";
+
+import {app} from "./Firebase";
+
 
 function App() {
+
+  // LEC-1 overview and realtime db use..
+  // const db = getDatabase(app);
+  // function putDataToFirebase(){
+  //   set(ref (db , "user/devdeep") ,{
+  //     id: 1,
+  //     name :"Devdeep",
+  //     age: 21,
+  //   });
+  // }
+
+  // LEC-2 (Authentication)
+  const auth = getAuth(app);
+
+  function signUp() {
+    createUserWithEmailAndPassword(
+      auth,
+      "nilay@gmail.com",
+      "nilay123@",
+      ).then((value) => console.log(value));
+
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Firewall connection</h1>
+      {/* <button onClick={putDataToFirebase}>Put data</button> */}
+      <button onClick={signUp}>Create Data</button>
     </div>
   );
 }
